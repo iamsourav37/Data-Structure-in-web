@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h1 class="text-center text-warning mb-5">Bubble Sort implementation</h1>
+  <div>
+    <form method="POST"> {% csrf_token %}
+      <div class="mb-3 row">
+    <label for="data" class="col-sm-2 col-form-label">Enter Comma Separated Value : </label>
+    <div class="col-sm-10">
+           <input id="data" class="form-control form-control-lg" type="text" placeholder="21, 12, 24, 44, 5, 7, 8, -6" aria-label=".form-control-lg example">
+
+    </div>
+  </div>
+      <button type="submit" class="btn btn-primary">Bubble Sort</button>
+    </form>
+  </div>
+
+</div>
+{% endblock content %}
