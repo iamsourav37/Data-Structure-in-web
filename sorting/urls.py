@@ -1,8 +1,10 @@
 from django.urls import path
 
-from .views import index, bubble_sort
+from .views import index, bubble_sort, insertion_sort
 
 urlpatterns = [
     path("", index, name="sorting-home"),
-    path("bubble/", bubble_sort, name="bubble-sort")
+    path("bubble-sort/", bubble_sort, name="bubble-sort"),
+    path("insertion-sort/", insertion_sort, name="insertion-sort"),
+
 ]
