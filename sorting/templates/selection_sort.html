@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+  <h1 class="text-center text-info mb-5">Selection Sort implementation</h1>
+  <div>
+    <form method="POST"> {% csrf_token %}
+      <div class="mb-3 row">
+    <label for="data" class="col-sm-2 col-form-label">Enter Comma Separated Value : </label>
+    <div class="col-sm-10">
+           <input name="values" id="data" class="form-control form-control-lg" type="text" placeholder="Example : 21, 12, 24, 44, 5, 7, 8, -6" aria-label=".form-control-lg example">
+
+    </div>
+  </div>
+      <button type="submit" class="btn btn-danger">Selection Sort</button>
+    </form>
+  </div>
+
+ <div class="container mt-5 p-2">
+     {% if msg %}
+      <h5 class="text-danger">{{ msg }}</h5>
+     {% endif%}
+    {% if sorted_data %}
+     <h1 class="text-warning">Actual Data : {{ unsorted_data }}</h1>
+      <h1 class="text-primary">Sorted Data : {{ sorted_data }} </h1>
+  {% endif %}
+ </div>
+
+</div>
+{% endblock content %}

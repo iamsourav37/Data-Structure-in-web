@@ -88,3 +88,39 @@ def insertion_sort(request):
         context['sorted_data'] = real_data
 
     return render(request, "insertion_sort.html", context)
+
+
+def selection_sort(request):
+    context = {
+        "title": "Selection Sorting",
+        **ACTIVE
+    }
+
+    if request.method == 'POST':
+        raw_data = request.POST['values']
+        values = raw_data.split(",")
+        real_data = []
+        try:
+            real_data = extract_real_data(values)
+        except Exception as e:
+            context['msg'] = f"Something is wrong. Please enter comma separated value. **(Error message : {e})"
+            return render(request, "selection_sort.html", context)
+
+        context['unsorted_data'] = real_data.copy()
+        print(real_data)
+        #  23 3 6 8 0
+        # selection sort implementation
+        for i in range(len(real_data)):
+            index_of_min_value = i
+            for j in range(i+1, len(real_data)):
+                if real_data[index_of_min_value] > real_data[j]:
+                    index_of_min_value = j
+            real_data[i], real_data[index_of_min_value] = real_data[index_of_min_value], real_data[i]
+
+
+        context['sorted_data'] = real_data
+        print(real_data)
+
+    return render(request, "selection_sort.html", context)
+
+
