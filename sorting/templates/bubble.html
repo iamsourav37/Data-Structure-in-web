@@ -21,7 +21,7 @@
      {% if msg %}
       <h5 class="text-danger">{{ msg }}</h5>
      {% endif%}
-    {% if sorted_data %}
+    {% if sorted_data.any %}
      <h1 class="text-warning">Actual Data : {{ unsorted_data }}</h1>
       <h1 class="text-primary">Sorted Data : {{ sorted_data }} </h1>
   {% endif %}

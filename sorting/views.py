@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+import numpy as np
 
 # Create your views here.
 
@@ -31,14 +32,14 @@ def bubble_sort(request):
         #  extracting data
         raw_data = request.POST['values']
         values = raw_data.split(",")
-        real_data = []
+        real_data = np.array([])
         try:
-            real_data = extract_real_data(values)
+            real_data = np.array(extract_real_data(values))
         except Exception as e:
             context['msg'] = f"Something is wrong. Please enter comma separated value. **(Error message : {e})"
             return render(request, "bubble.html", context)
 
-        context['unsorted_data'] = real_data.copy()
+        context['unsorted_data'] = np.copy(real_data)
 
         # Bubble sort implementation
         for i in range(len(real_data)):
@@ -116,10 +117,7 @@ def selection_sort(request):
                 if real_data[index_of_min_value] > real_data[j]:
                     index_of_min_value = j
             real_data[i], real_data[index_of_min_value] = real_data[index_of_min_value], real_data[i]
-
-
         context['sorted_data'] = real_data
-        print(real_data)
 
     return render(request, "selection_sort.html", context)
 
