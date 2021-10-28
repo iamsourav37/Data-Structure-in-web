@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 import numpy as np
+from numpy.lib.type_check import real
 
 # Create your views here.
 
@@ -68,15 +69,15 @@ def insertion_sort(request):
         values = raw_data.split(",")
         print(values)
 
-        real_data = []
+        real_data = np.array([])
 
         try:
-            real_data = extract_real_data(values)
+            real_data = np.array(extract_real_data(values))
             print(real_data)
         except Exception as e:
             context['msg'] = f"Something is wrong. Please enter comma separated value. **(Error message : {e})"
             return render(request, "insertion_sort.html", context)
-        context['unsorted_data'] = real_data.copy()
+        context['unsorted_data'] = list(np.copy(real_data))
 
         # insertion sort implementation
         for i in range(1, len(real_data)):
@@ -86,7 +87,7 @@ def insertion_sort(request):
                 real_data[j+1] = real_data[j]
                 j -= 1
             real_data[j+1] = key
-        context['sorted_data'] = real_data
+        context['sorted_data'] = list(real_data)
 
     return render(request, "insertion_sort.html", context)
 
@@ -100,14 +101,14 @@ def selection_sort(request):
     if request.method == 'POST':
         raw_data = request.POST['values']
         values = raw_data.split(",")
-        real_data = []
+        real_data = np.array([])
         try:
-            real_data = extract_real_data(values)
+            real_data = np.array(extract_real_data(values))
         except Exception as e:
             context['msg'] = f"Something is wrong. Please enter comma separated value. **(Error message : {e})"
             return render(request, "selection_sort.html", context)
 
-        context['unsorted_data'] = real_data.copy()
+        context['unsorted_data'] = list(np.copy(real_data))
         print(real_data)
         #  23 3 6 8 0
         # selection sort implementation
@@ -117,7 +118,7 @@ def selection_sort(request):
                 if real_data[index_of_min_value] > real_data[j]:
                     index_of_min_value = j
             real_data[i], real_data[index_of_min_value] = real_data[index_of_min_value], real_data[i]
-        context['sorted_data'] = real_data
+        context['sorted_data'] = list(real_data)
 
     return render(request, "selection_sort.html", context)
 
